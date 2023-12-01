@@ -6,13 +6,14 @@ use std::{
 
 use crate::Day;
 
-const MODULE_TEMPLATE: &str = r#"advent_of_code::solution!(DAY_NUMBER);
+const MODULE_TEMPLATE: &str = r#"use advent_of_code::Part;
+advent_of_code::solution!(DAY_NUMBER);
 
-pub fn part_one(input: &str) -> Option<u32> {
+pub fn part_a(input: &str) -> Option<u32> {
     None
 }
 
-pub fn part_two(input: &str) -> Option<u32> {
+pub fn part_b(input: &str) -> Option<u32> {
     None
 }
 
@@ -22,13 +23,13 @@ mod tests {
 
     #[test]
     fn test_part_one() {
-        let result = part_one(&advent_of_code::template::read_file("examples", DAY));
+        let result = part_a(&advent_of_code::template::read_file("examples", DAY, Some(Part('a'))));
         assert_eq!(result, None);
     }
 
     #[test]
     fn test_part_two() {
-        let result = part_two(&advent_of_code::template::read_file("examples", DAY));
+        let result = part_b(&advent_of_code::template::read_file("examples", DAY, Some(Part('b'))));
         assert_eq!(result, None);
     }
 }
@@ -44,7 +45,8 @@ fn create_file(path: &str) -> Result<File, std::io::Error> {
 
 pub fn handle(day: Day) {
     let input_path = format!("data/inputs/{day}.txt");
-    let example_path = format!("data/examples/{day}.txt");
+    let example_a_path = format!("data/examples/{day}a.txt");
+    let example_b_path = format!("data/examples/{day}b.txt");
     let module_path = format!("src/bin/{day}.rs");
 
     let mut file = match safe_create_file(&module_path) {
@@ -79,9 +81,19 @@ pub fn handle(day: Day) {
         }
     }
 
-    match create_file(&example_path) {
+    match create_file(&example_a_path) {
         Ok(_) => {
-            println!("Created empty example file \"{}\"", &example_path);
+            println!("Created empty example file \"{}\"", &example_a_path);
+        }
+        Err(e) => {
+            eprintln!("Failed to create example file: {e}");
+            process::exit(1);
+        }
+    }
+
+    match create_file(&example_b_path) {
+        Ok(_) => {
+            println!("Created empty example file \"{}\"", &example_b_path);
         }
         Err(e) => {
             eprintln!("Failed to create example file: {e}");

@@ -42,7 +42,8 @@ cargo scaffold <day>
 # output:
 # Created module file "src/bin/01.rs"
 # Created empty input file "data/inputs/01.txt"
-# Created empty example file "data/examples/01.txt"
+# Created empty example file "data/examples/01a.txt"
+# Created empty example file "data/examples/01b.txt"
 # ---
 # 🎄 Type `cargo solve 01` to run your solution.
 ```
