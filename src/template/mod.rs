@@ -15,7 +15,9 @@ pub const ANSI_RESET: &str = "\x1b[0m";
 pub fn read_file(folder: &str, day: Day, part: Option<Part>) -> String {
     let cwd = env::current_dir().unwrap();
     let filepath = if let Some(part) = part {
-        cwd.join("data").join(folder).join(format!("{day}{part}.txt"))
+        cwd.join("data")
+            .join(folder)
+            .join(format!("{day}{part}.txt"))
     } else {
         cwd.join("data").join(folder).join(format!("{day}.txt"))
     };
