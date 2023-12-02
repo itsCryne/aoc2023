@@ -1,4 +1,4 @@
-use advent_of_code::template::commands::{all, download, read, scaffold, solve};
+use advent_of_code::template::commands::{all, download, read, scaffold, solve, standalone};
 use args::{parse, AppArguments};
 
 mod args {
@@ -14,6 +14,9 @@ mod args {
             day: Day,
         },
         Scaffold {
+            day: Day,
+        },
+        Standalone {
             day: Day,
         },
         Solve {
@@ -51,6 +54,9 @@ mod args {
                 submit: args.opt_value_from_str("--submit")?,
                 time: args.contains("--time"),
             },
+            Some("standalone") => AppArguments::Standalone {
+                day: args.free_from_str()?,
+            },
             Some(x) => {
                 eprintln!("Unknown command: {x}");
                 process::exit(1);
@@ -81,6 +87,7 @@ fn main() {
             AppArguments::Download { day } => download::handle(day),
             AppArguments::Read { day } => read::handle(day),
             AppArguments::Scaffold { day } => scaffold::handle(day),
+            AppArguments::Standalone { day } => standalone::handle(day),
             AppArguments::Solve {
                 day,
                 release,

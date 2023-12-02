@@ -7,5 +7,7 @@ solve = "run --quiet --release -- solve"
 all = "run --quiet --release -- all"
 time = "run --quiet --release -- all --release --time"
 
+standalone = "run --quiet --release -- standalone"
+
 [env]
 AOC_YEAR = "2023"
