@@ -17,16 +17,15 @@ pub fn handle(day: Day) {
         Ok(content) => content,
     };
 
-    let mut import_split = src.split("\nadvent_of_code::solution!");
+    let mut import_split = src.split("advent_of_code::solution!");
     let imports = import_split.next().unwrap();
 
-    let mut front_split = import_split.next().unwrap().split("pub fn part_a");
-    front_split.next().unwrap();
+    let front_split = import_split.next().unwrap().split_once(";\n\n").unwrap();
 
-    let mut back_split = front_split.next().unwrap().split("\n#[cfg(test)]");
-    let solution = format!("pub fn part_a{}", back_split.next().unwrap());
+    let mut back_split = front_split.1.split("\n#[cfg(test)]");
+    let solution = format!("{}", back_split.next().unwrap());
 
-    let executable = format!("{}\n{}\n\n{}", imports, MAIN_FUNC, solution);
+    let executable = format!("{}{}\n\n{}", imports, MAIN_FUNC, solution);
 
     print!("{}", executable);
 }
