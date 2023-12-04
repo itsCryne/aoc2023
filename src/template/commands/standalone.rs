@@ -23,7 +23,7 @@ pub fn handle(day: Day) {
     let front_split = import_split.next().unwrap().split_once(";\n\n").unwrap();
 
     let mut back_split = front_split.1.split("\n#[cfg(test)]");
-    let solution = format!("{}", back_split.next().unwrap());
+    let solution = back_split.next().unwrap().to_string();
 
     let executable = format!("{}{}\n\n{}", imports, MAIN_FUNC, solution);
 
